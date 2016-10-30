@@ -6,5 +6,12 @@ html
         title= title ? title + " | " + site.title : site.title
       block styles
   body
+    header
+      h1= site.title
+      h2= site.description
+
     block body
       block main
+
+    footer
+      p Spencer Apple

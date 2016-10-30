@@ -22,7 +22,7 @@ var siteBuild = Metalsmith(__dirname)
     .use(markdown())
     .use(excerpts())
     .use(collections({
-      posts: {
+      content: {
         pattern: 'content/**.html',
         sortBy: 'publishDate',
         reverse: true
