@@ -1,0 +1,602 @@
+{
+  "countries": [
+    {
+      "name": "Peru",
+      "id": "peru",
+      "startAndEnds": [
+          { "start": "2015-08-31",
+            "end": "2015-10-19" } ]
+    },
+    {
+        "name": "Bolivia",
+        "id": "bolivia",
+        "startAndEnds": [
+            { "start": "2015-10-19",
+              "end": "2015-12-04" },
+            { "start": "2016-04-22",
+              "end": "2016-04-28" } ]
+    }, 
+    {
+        "name": "Chile",
+        "id": "chile",
+        "startAndEnds": [
+            { "start": "2015-12-04",
+              "end": "2016-02-12" },
+            { "start": "2016-02-18",
+              "end": "2016-03-02" } ]
+    },
+    {
+        "name": "Argentina",
+        "id": "argentina",
+        "startAndEnds": [
+            { "start": "2016-02-12",
+              "end": "2016-02-18" },
+            { "start": "2016-03-02",
+              "end": "2016-03-15" },
+            { "start": "2016-03-21",
+              "end": "2016-04-22" } ]
+    }, {
+        "name": "Uruguay",
+        "id": "uruguay",
+        "startAndEnds": [
+            { "start": "2016-03-15",
+              "end": "2016-03-21" } ]
+    }, {
+        "name": "Colombia",
+        "id": "colombia",
+        "startAndEnds": [
+            { "start": "2016-04-28",
+              "end": "2016-06-18" } ]
+    }, {
+        "name": "Panama",
+        "id": "panama",
+        "startAndEnds": [
+            { "start": "2016-06-18",
+              "end": "2016-07-05" } ]
+    }, {
+        "name": "Costa Rica",
+        "id": "costaRica",
+        "startAndEnds": [
+            { "start": "2016-07-05",
+              "end": "2016-07-20" } ]
+    }, {
+        "name": "Nicaragua",
+        "id": "nicaragua",
+        "startAndEnds": [
+            { "start": "2016-07-20",
+              "end": "2016-08-07" } ]
+    }, {
+        "name": "Honduras",
+        "id": "honduras",
+        "startAndEnds": [
+            { "start": "2016-08-07",
+              "end": "2016-08-13" } ]
+    }, {
+        "name": "Guatemala",
+        "id": "guatemala",
+        "startAndEnds": [
+            { "start": "2016-08-13",
+              "end": "2016-09-07" } ]
+    }
+  ],
+  "places": [
+    {
+      "name": "Lima",
+      "id": "#Peru_1",
+      "startDate": "2015-08-31",
+      "endDate": "2015-09-03",
+      "travelTime": 12
+    },
+    {
+      "name": "Iquitos & Amazon Jungle",
+      "id": "#Peru_2",
+      "startDate": "2015-09-03",
+      "endDate": "2015-09-10",
+      "travelTime": 3
+    }, 
+    {
+        "name": "Huaraz",
+        "id": "#Peru_3",
+        "startDate": "2015-09-10",
+        "endDate": "2015-09-16",
+        "travelTime": 11
+    },
+    {
+        "name": "Huánuco",
+        "id": "#Peru_4",
+        "startDate": "2015-09-16",
+        "endDate": "2015-09-17",
+        "travelTime": 10
+    },
+    {
+        "name": "Huancayo",
+        "id": "#Peru_5",
+        "startDate": "2015-09-17",
+        "endDate": "2015-09-20",
+        "travelTime": 8
+    },
+    {
+        "name": "Huacachina",
+        "id": "#Peru_6",
+        "startDate": "2015-09-20",
+        "endDate": "2015-09-24",
+        "travelTime": 14
+    },
+    {
+        "name": "Arequipa & Colca Canyon",
+        "id": "#Peru_7",
+        "startDate": "2015-09-24",
+        "endDate": "2015-09-30",
+        "travelTime": 14
+    },
+    {
+        "name": "Cusco",
+        "id": "#Peru_8",
+        "startDate": "2015-09-30",
+        "endDate": "2015-10-17",
+        "travelTime": 12
+    },
+    {
+        "name": "Puno",
+        "id": "#Peru_9",
+        "startDate": "2015-10-17",
+        "endDate": "2015-10-19",
+        "travelTime": 6
+    },
+    {
+        "name": "Copacabana",
+        "id": "#Bolivia_1",
+        "startDate": "2015-10-19",
+        "endDate": "2015-10-22",
+        "travelTime": 5
+    },
+    {
+        "name": "La Paz",
+        "id": "#Bolivia_2",
+        "startDate": "2015-10-22",
+        "endDate": "2015-11-03",
+        "travelTime": 4
+    },
+    {
+        "name": "Cochabamba & Toro Toro",
+        "id": "#Bolivia_3",
+        "startDate": "2015-11-03",
+        "endDate": "2015-11-11",
+        "travelTime": 19
+    },
+    {
+        "name": "Sucre",
+        "id": "#Bolivia_4",
+        "startDate": "2015-11-11",
+        "endDate": "2015-11-29",
+        "travelTime": 12
+    },
+    {
+        "name": "Potosí",
+        "id": "#Bolivia_5",
+        "startDate": "2015-11-29",
+        "endDate": "2015-12-01",
+        "travelTime": 4
+    },
+    {
+        "name": "Uyuni",
+        "id": "#Bolivia_6",
+        "startDate": "2015-12-01",
+        "endDate": "2015-12-04",
+        "travelTime": 4
+    },
+    {
+        "name": "San Pedro de Atacama",
+        "id": "#Chile_1",
+        "startDate": "2015-12-04",
+        "endDate": "2015-12-07",
+        "travelTime": 3
+    },
+    {
+        "name": "Santiago",
+        "id": "#Chile_2",
+        "startDate": "2015-12-07",
+        "endDate": "2015-12-13",
+        "travelTime": 24
+    },
+    {
+        "name": "Valparaíso",
+        "id": "#Chile_3",
+        "startDate": "2015-12-13",
+        "endDate": "2015-12-18",
+        "travelTime": 1.5
+    },
+    {
+        "name": "Pichilemu",
+        "id": "#Chile_4",
+        "startDate": "2015-12-18",
+        "endDate": "2015-12-20",
+        "travelTime": 5
+    },
+    {
+        "name": "Santiago",
+        "id": "#Chile_200",
+        "startDate": "2015-12-20",
+        "endDate": "2015-12-22",
+        "travelTime": 3.5
+    },
+    {
+        "name": "Puerto Octay/Lakes District Farm",
+        "id": "#Chile_5",
+        "startDate": "2015-12-22",
+        "endDate": "2016-01-17",
+        "travelTime": 15
+    },
+    {
+        "name": "Puerto Varas",
+        "id": "#Chile_6",
+        "startDate": "2016-01-17",
+        "endDate": "2016-01-19",
+        "travelTime": 6
+    },
+    {
+        "name": "Ancud",
+        "id": "#Chile_7",
+        "startDate": "2016-01-19",
+        "endDate": "2016-01-21",
+        "travelTime": 4
+    },
+    {
+        "name": "Dalcahue",
+        "id": "#Chile_8",
+        "startDate": "2016-01-21",
+        "endDate": "2016-01-24",
+        "travelTime": 2
+    },
+    {
+        "name": "Castro",
+        "id": "#Chile_9",
+        "startDate": "2016-01-24",
+        "endDate": "2016-01-27",
+        "travelTime": 3
+    },
+    {
+        "name": "Chaitén & Parque Pumalín",
+        "id": "#Chile_10",
+        "startDate": "2016-01-27",
+        "endDate": "2016-01-31",
+        "travelTime": 12
+    },
+    {
+        "name": "La Junta",
+        "id": "#Chile_11",
+        "startDate": "2016-01-31",
+        "endDate": "2016-02-01",
+        "travelTime": 10
+    },
+    {
+        "name": "Parque Queulat",
+        "id": "#Chile_12",
+        "startDate": "2016-02-01",
+        "endDate": "2016-02-02",
+        "travelTime": 8
+    },
+    {
+        "name": "Coyhaique",
+        "id": "#Chile_13",
+        "startDate": "2016-02-02",
+        "endDate": "2016-02-06",
+        "travelTime": 6
+    },
+    {
+        "name": "Cerro Castillo",
+        "id": "#Chile_14",
+        "startDate": "2016-02-06",
+        "endDate": "2016-02-11",
+        "travelTime": 5
+    },
+    {
+        "name": "Puerto Río Tranquilo",
+        "id": "#Chile_15",
+        "startDate": "2016-02-11",
+        "endDate": "2016-02-12",
+        "travelTime": 8
+    },
+    {
+        "name": "El Chaltén",
+        "id": "#Argentina_1",
+        "startDate": "2016-02-12",
+        "endDate": "2016-02-16",
+        "travelTime": 20
+    },
+    {
+        "name": "El Calafate",
+        "id": "#Argentina_2",
+        "startDate": "2016-02-16",
+        "endDate": "2016-02-18",
+        "travelTime": 3.5
+    },
+    {
+        "name": "Puerto Natales & Torres del Paine",
+        "id": "#Chile_18",
+        "startDate": "2016-02-18",
+        "endDate": "2016-02-29",
+        "travelTime": 13
+    },
+    {
+        "name": "Punta Arenas",
+        "id": "#Chile_19",
+        "startDate": "2016-02-29",
+        "endDate": "2016-03-02",
+        "travelTime": 4
+    },
+    {
+        "name": "Ushuaia",
+        "id": "#Argentina_3",
+        "startDate": "2016-03-02",
+        "endDate": "2016-03-04",
+        "travelTime": 12
+    },
+    {
+        "name": "Buenos Aires",
+        "id": "#Argentina_4",
+        "startDate": "2016-03-04",
+        "endDate": "2016-03-15",
+        "travelTime": 6
+    },
+    {
+        "name": "Montevideo",
+        "id": "#Uruguay_1",
+        "startDate": "2016-03-15",
+        "endDate": "2016-03-16",
+        "travelTime": 4
+    },
+    {
+        "name": "Punta del Diablo",
+        "id": "#Uruguay_2",
+        "startDate": "2016-03-16",
+        "endDate": "2016-03-19",
+        "travelTime": 4
+    },
+    {
+        "name": "Colonia del Sacramento",
+        "id": "#Uruguay_3",
+        "startDate": "2016-03-19",
+        "endDate": "2016-03-21",
+        "travelTime": 8
+    },
+    {
+        "name": "Buenos Aires",
+        "id": "#Argentina_400",
+        "startDate": "2016-03-21",
+        "endDate": "2016-03-30",
+        "travelTime": 3
+    },
+    {
+        "name": "Iguazú Falls",
+        "id": "#Argentina_5",
+        "startDate": "2016-03-30",
+        "endDate": "2016-04-01",
+        "travelTime": 4
+    },
+    {
+        "name": "Buenos Aires",
+        "id": "#Argentina_4000",
+        "startDate": "2016-04-01",
+        "endDate": "2016-04-15",
+        "travelTime": 4
+    },
+    {
+        "name": "Mendoza",
+        "id": "#Argentina_6",
+        "startDate": "2016-04-15",
+        "endDate": "2016-04-19",
+        "travelTime": 4
+    },
+    {
+        "name": "Salta",
+        "id": "#Argentina_7",
+        "startDate": "2016-04-19",
+        "endDate": "2016-04-22",
+        "travelTime": 5
+    },
+    {
+        "name": "Tarija",
+        "id": "#Bolivia_7",
+        "startDate": "2016-04-22",
+        "endDate": "2016-04-24",
+        "travelTime": 8
+    },
+    {
+        "name": "Santa Cruz",
+        "id": "#Bolivia_8",
+        "startDate": "2016-04-24",
+        "endDate": "2016-04-28",
+        "travelTime": 14
+    },
+    {
+        "name": "Bogota",
+        "id": "#Colombia_1",
+        "startDate": "2016-04-28",
+        "endDate": "2016-05-02",
+        "travelTime": 5
+    },
+    {
+        "name": "Medellín",
+        "id": "#Colombia_2",
+        "startDate": "2016-05-02",
+        "endDate": "2016-06-02",
+        "travelTime": 12
+    },
+    {
+        "name": "Jardín",
+        "id": "#Colombia_3",
+        "startDate": "2016-06-02",
+        "endDate": "2016-06-06",
+        "travelTime": 3
+    },
+    {
+        "name": "Manizales",
+        "id": "#Colombia_4",
+        "startDate": "2016-06-06",
+        "endDate": "2016-06-10",
+        "travelTime": 5
+    },
+    {
+        "name": "Salento",
+        "id": "#Colombia_5",
+        "startDate": "2016-06-10",
+        "endDate": "2016-06-14",
+        "travelTime": 4
+    },
+    {
+        "name": "Pereira",
+        "id": "#Colombia_6",
+        "startDate": "2016-06-14",
+        "endDate": "2016-06-15",
+        "travelTime": 0.45
+    },
+    {
+        "name": "Cartagena",
+        "id": "#Colombia_7",
+        "startDate": "2016-06-15",
+        "endDate": "2016-06-18",
+        "travelTime": 3
+    },
+    {
+        "name": "San Blas",
+        "id": "#Panama_1",
+        "startDate": "2016-06-18",
+        "endDate": "2016-06-23",
+        "travelTime": 40
+    },
+    {
+        "name": "Panama",
+        "id": "#Panama_2",
+        "startDate": "2016-06-23",
+        "endDate": "2016-06-27",
+        "travelTime": 4
+    },
+    {
+        "name": "Boquete",
+        "id": "#Panama_3",
+        "startDate": "2016-06-27",
+        "endDate": "2016-07-05",
+        "travelTime": 11
+    },
+    {
+        "name": "San Jose",
+        "id": "#CostaRica_1",
+        "startDate": "2016-07-05",
+        "endDate": "2016-07-07",
+        "travelTime": 10
+    },
+    {
+        "name": "Monteverde",
+        "id": "#CostaRica_2",
+        "startDate": "2016-07-07",
+        "endDate": "2016-07-10",
+        "travelTime": 8
+    },
+    {
+        "name": "Montezuma",
+        "id": "#CostaRica_3",
+        "startDate": "2016-07-10",
+        "endDate": "2016-07-13",
+        "travelTime": 10
+    },
+    {
+        "name": "Santa Teresa",
+        "id": "#CostaRica_4",
+        "startDate": "2016-07-13",
+        "endDate": "2016-07-16",
+        "travelTime": 1.5
+    },
+    {
+        "name": "Tamarindo",
+        "id": "#CostaRica_5",
+        "startDate": "2016-07-16",
+        "endDate": "2016-07-19",
+        "travelTime": 5
+    },
+    {
+        "name": "Liberia",
+        "id": "#CostaRica_6",
+        "startDate": "2016-07-19",
+        "endDate": "2016-07-20",
+        "travelTime": 3
+    },
+    {
+        "name": "San Juan",
+        "id": "#Nicaragua_1",
+        "startDate": "2016-07-20",
+        "endDate": "2016-07-25",
+        "travelTime": 6
+    },
+    {
+        "name": "Ometepe",
+        "id": "#Nicaragua_2",
+        "startDate": "2016-07-25",
+        "endDate": "2016-07-29",
+        "travelTime": 3
+    },
+    {
+        "name": "Granada",
+        "id": "#Nicaragua_3",
+        "startDate": "2016-07-29",
+        "endDate": "2016-08-01",
+        "travelTime": 3
+    },
+    {
+        "name": "Las Penitas",
+        "id": "#Nicaragua_4",
+        "startDate": "2016-08-01",
+        "endDate": "2016-08-04",
+        "travelTime": 6
+    },
+    {
+        "name": "Leon",
+        "id": "#Nicaragua_5",
+        "startDate": "2016-08-04",
+        "endDate": "2016-08-07",
+        "travelTime": 0.45
+    },
+    {
+        "name": "Utila",
+        "id": "#Honduras_1",
+        "startDate": "2016-08-07",
+        "endDate": "2016-08-13",
+        "travelTime": 18
+    },
+    {
+        "name": "Flores",
+        "id": "#Guatemala_1",
+        "startDate": "2016-08-13",
+        "endDate": "2016-08-16",
+        "travelTime": 14.5
+    },
+    {
+        "name": "Semuc Champey",
+        "id": "#Guatemala_2",
+        "startDate": "2016-08-16",
+        "endDate": "2016-08-19",
+        "travelTime": 10
+    },
+    {
+        "name": "Antigua",
+        "id": "#Guatemala_3",
+        "startDate": "2016-08-19",
+        "endDate": "2016-08-30",
+        "travelTime": 10
+    },
+    {
+        "name": "San Marcos",
+        "id": "#Guatemala_4",
+        "startDate": "2016-08-30",
+        "endDate": "2016-09-06",
+        "travelTime": 3.5
+    },
+    {
+        "name": "Guatemala City",
+        "id": "#Guatemala_5",
+        "startDate": "2016-09-06",
+        "endDate": "2016-09-07",
+        "travelTime": 6
+    }
+  ]
+}

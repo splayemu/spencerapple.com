@@ -5,9 +5,12 @@ var permalinks = require('metalsmith-permalinks');
 var moment = require('moment');
 var serve = require('metalsmith-serve');
 var watch = require('metalsmith-watch');
-var branch = require('metalsmith-branch');
 var collections = require('metalsmith-collections');
 var excerpts = require('metalsmith-excerpts');
+
+//src/content/test-post/preprocess.js
+
+var preprocess = require('metalsmith-preprocess');
 
 var siteBuild = Metalsmith(__dirname)
     .metadata({
@@ -23,22 +26,15 @@ var siteBuild = Metalsmith(__dirname)
     .use(excerpts())
     .use(collections({
       content: {
-        pattern: 'content/**.html',
+        pattern: 'content/**/*.html',
         sortBy: 'publishDate',
         reverse: true
       }
     }))
-    .use(branch('content/**.html')
-        .use(permalinks({
-          pattern: 'content/:title',
-          relative: false
-        }))
-    )
-    .use(branch('!posts/**.html')
-        .use(branch('!index.md').use(permalinks({
-          relative: false
-        })))
-    )
+    .use(permalinks({
+      relative: false
+    }))
+    .use(preprocess())
     .use(layouts({
       engine: 'jade',
       directory: 'templates',
@@ -57,6 +53,9 @@ var siteBuild = Metalsmith(__dirname)
         throw err;
       }
       else {
-        console.log('Site build complete!');
+        console.log('Served files:');
+        for (key in files) {
+          console.log(key);
+        }
       }
     });
