@@ -7,6 +7,7 @@ var serve = require('metalsmith-serve');
 var watch = require('metalsmith-watch');
 var collections = require('metalsmith-collections');
 var excerpts = require('metalsmith-excerpts');
+var browserify = require('metalsmith-browserify-alt');
 
 //src/content/test-post/preprocess.js
 
@@ -35,6 +36,7 @@ var siteBuild = Metalsmith(__dirname)
       relative: false
     }))
     .use(preprocess())
+    .use(browserify())
     .use(layouts({
       engine: 'jade',
       directory: 'templates',

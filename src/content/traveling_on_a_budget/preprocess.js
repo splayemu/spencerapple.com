@@ -1,6 +1,7 @@
 d3 = require('d3')
 fs = require('fs')
 path = require('path')
+graphComponents = require('graph-components')
 
 function parseNumber (numberString) {
     if (numberString === undefined) {
@@ -33,9 +34,13 @@ var twoDecimalRound = d3.format("$,.2f"),
       byDate: null,
       budgetPerCountry: null,
       totalDays: 0,
-      totalAverage: null };
+      totalAverage: null,
+      places: null,
+      countryColors: null, };
 
 module.exports.asyncLoad = function (htmlContent, filesInDirectory, files) {
+  console.log('graphComponents', Object.keys(graphComponents))
+
   console.log('asyncLoad called', htmlContent.directory);
   budget = new Promise(function (resolve, reject) {
     // read budget file
@@ -91,7 +96,8 @@ module.exports.asyncLoad = function (htmlContent, filesInDirectory, files) {
             endDate = new Date(place.endDate),
             startDate = new Date(place.startDate),
             difference = daysElapsed(startDate, endDate);
-place.midDate = new Date(((endDate - startDate) / 2) + startDate.getTime());
+
+        place.midDate = new Date(((endDate - startDate) / 2) + startDate.getTime());
 
         byDate.forEach(function (day) {
             if(new Date(day.key) < endDate &&
@@ -145,8 +151,16 @@ place.midDate = new Date(((endDate - startDate) / 2) + startDate.getTime());
         }; })
       .entries(data.byDate);
 
+    data.countryColors = placesData.countries.reduce(
+        function (previousValue, currentValue, currentIndex, array) {
+            previousValue[currentValue.name] = d3.schemeCategory20[currentIndex];
+            return previousValue;
+        }, {});
+
     // update json file with processed data
     placesFile.contents = Buffer.from(JSON.stringify(placesData), 'utf-8');
+    // no longer need budget file to be served
+    delete files[path.join(htmlContent.directory, './data/budget.csv')];
 
     resolve();
   });
@@ -167,4 +181,20 @@ module.exports.totalSpent = function (querySelector) {
 module.exports.averageDailySpent = function (querySelector) {
   el = querySelector('#averageDailySpent');
   el.innerHTML = twoDecimalRound(data.totalAverage.averageDailySpent);
+}
+
+
+module.exports.averageDailySpent = function (querySelector) {
+    var barChart = graphComponents.barChart()
+        .x(function (d) { return d.key; })
+        .y(function (d) { return d.value.averageDailySpent; })
+        .yTickFormat(d3.format("$,"))
+        .yLabel('Average Daily Spending')
+        .color(function (d) { return data.countryColors[d.key]; })
+        .hoverText(function (d) { return twoDecimalRound(d.value.averageDailySpent); })
+        .key(null);
+
+    d3.select(this.document).select('#budgetByCountry')
+        .datum(data.budgetPerCountry)
+        .call(barChart);
 }

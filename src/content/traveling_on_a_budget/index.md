@@ -15,9 +15,7 @@ Managing our budget was an everyday activity, and it inspired me to break it dow
 
 <link rel="stylesheet" href="css/main.css"></link>
 <script type="text/javascript" src="lib/d3.min.js"></script>
-<script type="text/javascript" src="data/places.js"></script>
-<script type="text/javascript" src="src/graphcomponents.js"></script>
-<script type="text/javascript" src="src/visualization.js"></script>
+<script type="text/javascript" src="src/graphComponents.js"></script>
 <script type="text/javascript" src="src/main.js"></script>
 
 Overall we traveled for **<span id="totalDays"></span> days**, spent **<span id="totalSpent"></span>** and ended spending **<span id="averageDailySpent"></span> per day** between the two of us.
