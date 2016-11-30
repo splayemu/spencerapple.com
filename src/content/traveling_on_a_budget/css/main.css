@@ -26,7 +26,7 @@ svg text {
   stroke-opacity: 1;
 } 
 
-.chart text {
+.chart .invisible {
   fill-opacity: 0;
 }
 
@@ -34,6 +34,10 @@ svg text {
   stroke-opacity: 0;
   fill-opacity: 1;
 } 
+
+.chart .key text {
+  fill-opacity: 1;
+}
 
 .chart .key text {
   fill-opacity: 1;

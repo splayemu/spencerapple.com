@@ -64,7 +64,7 @@ module.exports.asyncLoad = function (htmlContent, filesInDirectory, files) {
         places = placesData.places;
 
     // calculate length of stay in each country
-    placesData.countries.forEach(function (country) {
+    countries.forEach(function (country) {
       country.startAndEnds.forEach(function (dates) {
         dates.start = new Date(dates.start);
         dates.end = new Date(dates.end);
@@ -80,46 +80,42 @@ module.exports.asyncLoad = function (htmlContent, filesInDirectory, files) {
 
     // update places to have a country tag
     var re = /#(\w+)_/;
-    placesData.places = places.map(function (place) {
+    data.places = places.map(function (place) {
       place.country = re.exec(place.id)[1];
 
       if (alternateCountryNames.hasOwnProperty(place.country)) {
           place.country = alternateCountryNames[place.country];
       }
 
-      return place;
-    });
+      var days = [],
+          endDate = new Date(place.endDate),
+          startDate = new Date(place.startDate),
+          difference = daysElapsed(startDate, endDate);
 
-    // aggregate amount spent and num days by place
-    placesData.places.forEach(function (place) {
-        var days = [],
-            endDate = new Date(place.endDate),
-            startDate = new Date(place.startDate),
-            difference = daysElapsed(startDate, endDate);
+      place.midDate = new Date(((endDate - startDate) / 2) + startDate.getTime());
 
-        place.midDate = new Date(((endDate - startDate) / 2) + startDate.getTime());
-
-        byDate.forEach(function (day) {
-            if(new Date(day.key) < endDate &&
-               new Date(day.key) >= startDate) {
-                days.push(day);
-            }
-        });
-
-        daysNest = d3.nest()
-            .rollup(function (v) { return {
-                'days': v.length,
-                'amount': d3.sum(v, function (d) { return d.value.amount; })
-            }; })
-            .entries(days);
-
-        // covers empty days that we didn't enter any money for
-        if (difference !== daysNest.days) {
-            daysNest.days = difference;
+      byDate.forEach(function (day) {
+        if (new Date(day.key) < endDate && new Date(day.key) >= startDate) {
+          days.push(day);
         }
+      });
 
-        place.days = days;
-        place.value = daysNest;
+      daysNest = d3.nest()
+       .rollup(function (v) { return {
+         'days': v.length,
+         'amount': d3.sum(v, function (d) { return d.value.amount; })
+       }; })
+       .entries(days);
+
+      // covers empty days that we didn't enter any money for
+      if (difference !== daysNest.days) {
+        daysNest.days = difference;
+      }
+
+      place.days = days;
+      place.value = daysNest;
+
+      return place;
     });
 
     // aggregate amount spent and num days by country
@@ -134,7 +130,7 @@ module.exports.asyncLoad = function (htmlContent, filesInDirectory, files) {
           averageDailySpent: amount / days,
         };
       })
-      .entries(placesData.places);
+      .entries(data.places);
 
     // total length (remember to add an extra day to the last place)
     data.totalDays = countries.reduce(function (prev, curr) {
@@ -151,7 +147,7 @@ module.exports.asyncLoad = function (htmlContent, filesInDirectory, files) {
         }; })
       .entries(data.byDate);
 
-    data.countryColors = placesData.countries.reduce(
+    data.countryColors = countries.reduce(
         function (previousValue, currentValue, currentIndex, array) {
             previousValue[currentValue.name] = d3.schemeCategory20[currentIndex];
             return previousValue;
@@ -183,8 +179,7 @@ module.exports.averageDailySpent = function (querySelector) {
   el.innerHTML = twoDecimalRound(data.totalAverage.averageDailySpent);
 }
 
-
-module.exports.averageDailySpent = function (querySelector) {
+module.exports.budgetByCountry = function (querySelector) {
     var barChart = graphComponents.barChart()
         .x(function (d) { return d.key; })
         .y(function (d) { return d.value.averageDailySpent; })
@@ -197,4 +192,52 @@ module.exports.averageDailySpent = function (querySelector) {
     d3.select(this.document).select('#budgetByCountry')
         .datum(data.budgetPerCountry)
         .call(barChart);
+}
+
+module.exports.generateScatterplots = function (querySelector) {
+    var rScale = d3.scaleLinear()
+        .domain(d3.extent(data.places, function (d) { return d.value.days; }))
+        .range([5, 15]);
+
+    var scatterplotPlaces = graphComponents.scatterplot()
+        .x(function (d) { return new Date(d.midDate); })
+        .y(function (d) { return d.value.amount / d.value.days; })
+        .r(function (d) { return rScale(d.value.days); })
+        .xScaleGenerator(function (data, width, height) {
+            return d3.scaleTime()
+                .domain(d3.extent(data, function (d) { return new Date(d.midDate); }))
+                .range([0, width])
+                .nice(); })
+        .xTickFormat(d3.timeFormat("%b '%y"))
+        .yTickFormat(d3.format("$,"))
+        .yLabel('Average Daily Spending')
+        .color(function (d) { return data.countryColors[d.country]; })
+        .hoverText(function (d) { return d.name;});
+
+    d3.select(this.document).select('#spendingPerPlace')
+        .datum(data.places)
+        .call(scatterplotPlaces);
+
+    d3.select(this.document).selectAll('#spendingPerPlace .xAxis g text')
+        .attr("transform", "rotate(30)")
+        .attr("x", 3)
+        .style("text-anchor", "start");
+
+    var scatterplot1 = graphComponents.scatterplot()
+        .x(function (d) { return d.value.days; })
+        .y(function (d) { return d.value.amount / d.value.days; })
+        .r(function (d) { return rScale(d.value.days); })
+        .xScaleGenerator(function (data, width, height) {
+            return d3.scaleLinear()
+                .domain([0, d3.max(data, function (d) { return d.value.days; })])
+                .range([0, width]); })
+        .yTickFormat(d3.format("$,"))
+        .xLabel('Length of Stay (days)')
+        .yLabel('Average Daily Spending')
+        .color(function (d) { return data.countryColors[d.country]; })
+        .hoverText(function (d) { return d.name;});
+
+    d3.select(this.document).select('#avgVsLength')
+        .datum(data.places)
+        .call(scatterplot1);
 }

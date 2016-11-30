@@ -1,4 +1,3 @@
-
 // use dispatch.on("load.namespace", function (data) { ... }); to use the data from budget.csv
 var dispatch = d3.dispatch("loaded"),
     twoDecimalRound = d3.format("$,.2f");
@@ -35,20 +34,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-//dispatch.on("loaded.budgetByCountry", function (data) {
-//    var barChart = graphComponents.barChart()
-//        .x(function (d) { return d.key; })
-//        .y(function (d) { return d.value.averageDailySpent; })
-//        .yTickFormat(d3.format("$,"))
-//        .yLabel('Average Daily Spending')
-//        .color(function (d) { return data.countryColors[d.key]; })
-//        .hoverText(function (d) { return twoDecimalRound(d.value.averageDailySpent); })
-//        .key(null);
-//
-//    d3.select('#budgetByCountry')
-//        .datum(data.budgetPerCountry)
-//        .call(barChart);
-//});
+dispatch.on("loaded.budgetByCountry", function (data) {
+    var barChart = graphComponents.barChart()
+        .x(function (d) { return d.key; })
+        .y(function (d) { return d.value.averageDailySpent; })
+        .yTickFormat(d3.format("$,"))
+        .yLabel('Average Daily Spending')
+        .color(function (d) { return data.countryColors[d.key]; })
+        .hoverText(function (d) { return twoDecimalRound(d.value.averageDailySpent); })
+        .key(null)
+        .rendered(true);
+
+    d3.select('#budgetByCountry')
+        .datum(data.budgetPerCountry)
+        .call(barChart);
+});
 
 dispatch.on("loaded.budgetByPlace", function (data) {
     var rScale = d3.scaleLinear()
@@ -68,7 +68,8 @@ dispatch.on("loaded.budgetByPlace", function (data) {
         .yTickFormat(d3.format("$,"))
         .yLabel('Average Daily Spending')
         .color(function (d) { return data.countryColors[d.country]; })
-        .hoverText(function (d) { return d.name;});
+        .hoverText(function (d) { return d.name;})
+        .rendered(true);
 
     d3.select('#spendingPerPlace')
         .datum(data.places)
@@ -91,7 +92,8 @@ dispatch.on("loaded.budgetByPlace", function (data) {
         .xLabel('Length of Stay (days)')
         .yLabel('Average Daily Spending')
         .color(function (d) { return data.countryColors[d.country]; })
-        .hoverText(function (d) { return d.name;});
+        .hoverText(function (d) { return d.name;})
+        .rendered(true);
 
     d3.select('#avgVsLength')
         .datum(data.places)
