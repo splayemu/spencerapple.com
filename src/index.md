@@ -1,5 +1,5 @@
 ---
 title: blog of content
-layout: index.jade
+layout: index.pug
 paginate: content
 ---

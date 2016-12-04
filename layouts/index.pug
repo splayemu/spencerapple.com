@@ -1,0 +1,38 @@
+extends layout
+
+mixin link(post)
+  if block
+    if post.externalUrl
+       a(href=post.externalUrl target="_blank")
+         block
+    else 
+       a(href=`/${post.path}`)
+         block
+  else
+    text No Content for the Link
+
+block main
+  #content
+    if collections.content && collections.content.length > 0
+      each post in collections.content
+        article.article
+          header
+            h2
+              +link(post)
+                != post.title
+            h3
+              div.date #{moment(post.publishDate).format("M.D.YYYY")}
+                if modifyDate && moment(post.publishDate).isBefore(modifyDate)
+                  span Updated #{moment(post.modifyDate).format("M.D.YYYY")}
+
+          - var klass = 'content'
+          if post.withImage
+            - klass = 'content withImage'
+          section(class=klass)
+              if post.withImage
+                +link(post)
+                  img.left(src=`/${post.path}/${post.withImage}`)
+              if post.excerpt
+                != post.excerpt
+    else
+      h2 there ain't anything here, man

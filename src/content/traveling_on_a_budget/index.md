@@ -1,7 +1,7 @@
 ---
 title: Visualizing our yearlong budget through Latin America
 author: Spencer Apple
-template: post.jade
+layout: post.pug
 withImage: budgetVis.png
 publishDate: 2016-09-20 15:00
 modifyDate: 2016-09-20 15:00

@@ -9,20 +9,22 @@ var collections = require('metalsmith-collections');
 var excerpts = require('metalsmith-excerpts');
 var browserify = require('metalsmith-browserify-alt');
 
-//src/content/test-post/preprocess.js
-
 var preprocess = require('metalsmith-preprocess');
 
 var siteBuild = Metalsmith(__dirname)
     .metadata({
       site: {
-        title: "SAPPLE's PROJECTS",
+        title: "Things SAPPLE Makes",
         url: 'https://spencerapple.com',
-        description: 'Fun times for all'
+        description: '',
+        repo: "https://gitlab.com/splayemu/splayemu.gitlab.io"
       }
     })
     .source('./src')
     .destination('./build')
+    .ignore([
+      '**/.*.swp'
+    ])
     .use(markdown())
     .use(excerpts())
     .use(collections({
@@ -30,6 +32,9 @@ var siteBuild = Metalsmith(__dirname)
         pattern: 'content/**/*.html',
         sortBy: 'publishDate',
         reverse: true
+      },
+      partials: {
+        pattern: 'partials/**/*.html'
       }
     }))
     .use(permalinks({
@@ -37,10 +42,14 @@ var siteBuild = Metalsmith(__dirname)
     }))
     .use(preprocess())
     .use(browserify())
+    .use(function (files, metadata, done) {
+      console.log(metadata);
+      done();
+    })
     .use(layouts({
-      engine: 'jade',
-      directory: 'templates',
-      moment: moment
+      engine: 'pug',
+      moment: moment,
+      partials: "partials"
     }))
     .use(serve({
       port: 8080,
