@@ -1,0 +1,95 @@
+svg {
+  stroke: #000;
+  stroke-opacity: 0;
+  stroke-width: 3;
+}
+
+svg text {
+  fill: black;
+  font-size: 20px;
+}
+
+.axis text {
+  font: 15px sans-serif;
+}
+
+.axis line,
+.axis path {
+  stroke-opacity: 1;
+  stroke-width: 1;
+  fill: none;
+  shape-rendering: auto;
+}
+
+.chart .highlight,
+.chart .highlight {
+  stroke-opacity: 1;
+} 
+
+.chart text {
+  fill-opacity: 0;
+}
+
+.chart .highlight text {
+  stroke-opacity: 0;
+  fill-opacity: 1;
+} 
+
+.chart .key text {
+  fill-opacity: 1;
+}
+
+.axis .label {
+  font-size: 20px;
+}
+
+.barChart .xAxis path {
+  display: none;
+}
+
+.barChart .chart text {
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.scatterplot .chart text {
+  pointer-events: none;
+}
+
+.scatterplot .chart .line {
+  stroke-width: 2;
+  stroke-opacity: 1;
+  fill-opacity: 0;
+  stroke: #9F9E9E;
+}
+
+.chart .key text{
+  fill-opacity: 1;
+  text-anchor: start;
+}
+
+.chart .key .checkbox{
+  stroke-opacity: 1;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+  cursor: default;
+}
+
+#lengthOfStay .xAxis text,
+#travelSpeedCountry .xAxis text {
+  font-size: 13px;
+}
+
+
+#travelTimePerPlace .xAxis g,
+#lengthOfStayPerPlace .xAxis g {
+  visibility: hidden;
+}
