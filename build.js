@@ -80,8 +80,5 @@ var siteBuild = Metalsmith(__dirname)
       }
       else {
         console.log('Served files:');
-        for (key in files) {
-          console.log(key);
-        }
       }
     });

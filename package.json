@@ -2,7 +2,7 @@
   "name": "spencer-apple-site",
   "private": true,
   "repository": {
-    "url": "https://gitlab.com/splayemu/splayemu.gitlab.io"
+    "url": "https://github.com/splayemu/spencerapple.com.git"
   },
   "dependencies": {
     "browserify": "^13.1.1",
@@ -17,6 +17,7 @@
     "metalsmith-markdown": "^0.2.1",
     "metalsmith-permalinks": "^0.1.0",
     "metalsmith-watch": "^1.0.3",
+    "moment": "^2.17.1",
     "pug": "^2.0.0-beta6"
   },
   "scripts": {
