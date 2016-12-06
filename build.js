@@ -8,8 +8,16 @@ var watch = require('metalsmith-watch');
 var collections = require('metalsmith-collections');
 var excerpts = require('metalsmith-excerpts');
 var browserify = require('metalsmith-browserify-alt');
+var msif = require('metalsmith-if');
 
 var preprocess = require('metalsmith-preprocess');
+
+// look for build flag
+var preview = false;
+var args = process.argv.slice(2);
+if (args.length) {
+  preview = true;
+}
 
 var siteBuild = Metalsmith(__dirname)
     .metadata({
@@ -51,14 +59,21 @@ var siteBuild = Metalsmith(__dirname)
       moment: moment,
       partials: "partials"
     }))
-    .use(serve({
-      port: 8080,
-      verbose: true
-    }))
-    .use(watch({
-      pattern: '**/*',
-      livereload: true
-    }))
+    // livereload and preview server only run if command line argument present
+    .use(msif(
+      preview,
+      serve({
+        port: 8080,
+        verbose: true
+      })
+    ))
+    .use(msif(
+      preview,
+      watch({
+        pattern: '**/*',
+        livereload: preview
+      })
+    ))
     .build(function (err, files) {
       if (err) {
         throw err;
