@@ -1,3 +1,5 @@
+'use strict';
+
 /* Seimei Matsusaki
    https://bl.ocks.org/Lulkafe/c77a36d5efb603e788b03eb749a4a714
    Reusable, pure d3 Checkbox */
@@ -11,9 +13,9 @@ function d3CheckBox () {
         markStrokeWidth = 3,
         boxStrokeWidth = 3,
         checked = false,
-        clickEvent;
+        clickEvent = function (checked) { return null; };
 
-    function checkBox (selection) {
+    function my (selection) {
 
         var g = selection.append("g")
                 .attr('class', 'checkbox'),
@@ -51,65 +53,68 @@ function d3CheckBox () {
             checked = !checked;
             mark.style("stroke-opacity", (checked)? 1 : 0);
 
-            if(clickEvent)
-                clickEvent(checked);
+            clickEvent(checked);
 
             d3.event.stopPropagation();
         });
 
     }
 
-    checkBox.size = function (val) {
-        size = val;
-        return checkBox;
+    my.size = function (_) {
+        if(!arguments.length) return size;
+        size = _;
+        return my;
     }
 
-    checkBox.x = function (val) {
-        x = val;
-        return checkBox;
+    my.x = function (_) {
+        if(!arguments.length) return x;
+        x = _;
+        return my;
     }
 
-    checkBox.y = function (val) {
-        y = val;
-        return checkBox;
+    my.y = function (_) {
+        if(!arguments.length) return y;
+        y = _;
+        return my;
     }
 
-    checkBox.rx = function (val) {
-        rx = val;
-        return checkBox;
+    my.rx = function (_) {
+        if(!arguments.length) return rx;
+        rx = _;
+        return my;
     }
 
-    checkBox.ry = function (val) {
-        ry = val;
-        return checkBox;
+    my.ry = function (_) {
+        if(!arguments.length) return ry;
+        ry = _;
+        return my;
     }
 
-    checkBox.markStrokeWidth = function (val) {
-        markStrokeWidth = val;
-        return checkBox;
+    my.markStrokeWidth = function (_) {
+        if(!arguments.length) return markStrokeWidth;
+        markStrokeWidth = _;
+        return my;
     }
 
-    checkBox.boxStrokeWidth = function (val) {
-        boxStrokeWidth = val;
-        return checkBox;
+    my.boxStrokeWidth = function (_) {
+        if(!arguments.length) return boxStrokeWidth;
+        boxStrokeWidth = _;
+        return my;
     }
 
-    checkBox.checked = function (val) {
-
-        if(val === undefined) {
-            return checked;
-        } else {
-            checked = val;
-            return checkBox;
-        }
+    my.checked = function (_) {
+        if(!arguments.length) return checked;
+        checked = _;
+        return my;
     }
 
-    checkBox.clickEvent = function (val) {
-        clickEvent = val;
-        return checkBox;
+    my.clickEvent = function (_) {
+        if(!arguments.length) return clickEvent;
+        clickEvent = _;
+        return my;
     }
 
-    return checkBox;
+    return my;
 }
 
 module.exports.colorRow = function colorRow () {
@@ -157,7 +162,8 @@ module.exports.colorRow = function colorRow () {
 module.exports.checkBoxRow = function checkBoxRow () {
     var text = null,
         checked = false,
-        clickFunction = function (checked) { return null; };
+        clickFunction = function (checked) { return null; },
+        startingValue = false;
 
     function my (selection) {
         selection.each(function (data, i) {
@@ -173,6 +179,10 @@ module.exports.checkBoxRow = function checkBoxRow () {
                 .clickEvent(clickFunction);
 
             d3.select(this).call(checkBox)
+
+            if (startingValue) {
+                clickFunction(checked);
+            }
         });
     }
 
@@ -191,6 +201,60 @@ module.exports.checkBoxRow = function checkBoxRow () {
     my.clickFunction = function (_) {
         if(!arguments.length) return clickFunction;
         clickFunction = _;
+        return my;
+    };
+
+    my.startingValue = function (_) {
+        if(!arguments.length) return startingValue;
+        startingValue = _;
+        return my;
+    };
+
+    return my;
+}
+
+module.exports.key = function key () {
+    const rowHeight = 20;
+    const rowPadding = 5;
+    let x = 0;
+    let y = 0;
+    let datum = [];
+
+    function my (selection) {
+        selection.datum(datum);
+
+        selection.each(function (data, i) {
+            var key = d3.select(this)
+                .attr('class', 'key')
+                .attr("transform", "translate(" + x + ',' + y + ')');
+
+            var row = key
+                .selectAll('g')
+                .data(data)
+                .enter().append('g')
+                .attr('transform', function (d, i) {
+                    return 'translate(0,' + (i * (rowHeight + rowPadding)) + ')'; })
+                .each(function (rowObj, i) {
+                    //rowObj.height(rowHeight); not implemented
+                    d3.select(this).datum("already encoded").call(rowObj); });
+        });
+    }
+
+    my.x = function (_) {
+        if(!arguments.length) return x;
+        x = _;
+        return my;
+    };
+
+    my.y = function (_) {
+        if(!arguments.length) return y;
+        y = _;
+        return my;
+    };
+
+    my.datum = function (_) {
+        if(!arguments.length) return datum;
+        datum = _;
         return my;
     };
 

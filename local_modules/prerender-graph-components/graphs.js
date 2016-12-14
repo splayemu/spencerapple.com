@@ -1,9 +1,9 @@
 'use strict';
 
 const utils = require('./utils');
-const rows = require('./rows');
-const key = require('./key');
+const keyComponents = require('./keyComponents');
 const graphComponents = require('./graphComponents');
+const isNode = require('detect-node');
 
 module.exports.barChart = function () {
 
@@ -31,19 +31,8 @@ module.exports.barChart = function () {
                        .text(function (d) { return null; })
                        .dy(function(d) { return -10; }),
 
-        key = function (data, width, height, xScale, yScale) {
-                  var selection = d3.select(this),
-                      graphKey = key().x(width - 80).y(10),
-                      // a blank color row to update later
-                      datum = [rows.colorRow()];
-
-                  selection
-                      .append('g')
-                      .datum(datum)
-                      .call(graphKey);
-              },
-
-        rendered = false;
+        key = keyComponents.key()
+            .datum([keyComponents.colorRow()]);
 
     var svg = chart.getSVGComponent();
 
@@ -52,14 +41,13 @@ module.exports.barChart = function () {
 
     function my (selection) {
         chart
-            .prerendered(rendered)
             .xScaleGenerator(xScaleGenerator)
             .yScaleGenerator(yScaleGenerator)
             .yTickFormat(yTickFormat)
             .xLabel(xLabel)
             .yLabel(yLabel)
             .onPlot('barChart-server', function (data, width, height, xScale, yScale) {
-                if (rendered) return;
+                if (!isNode) return;
 
                 barLabel
                     .dx(xScale.bandwidth() / 2);
@@ -95,7 +83,7 @@ module.exports.barChart = function () {
                     .exit().remove();
              })
             .onPlot('barChart-client', function (data, width, height, xScale, yScale) {
-                if (!rendered) return;
+                if (isNode) return;
 
                 // update bar label to not go out of bounds
                 barLabel
@@ -131,7 +119,7 @@ module.exports.barChart = function () {
                     .on("mouseenter", function (d) {
                         selection.select('.key .colorRow')
                             .datum(d)
-                            .call(rows.colorRow()
+                            .call(keyComponents.colorRow()
                                       .text(d.country)
                                       .color(color(d)));
 
@@ -144,12 +132,19 @@ module.exports.barChart = function () {
                         // nullify the color key
                         selection.select('.key .colorRow')
                             .datum(d)
-                            .call(rows.colorRow());
+                            .call(keyComponents.colorRow());
 
                         d3.select(this.parentNode)
                             .classed("highlight", false) });
             })
-            .onPlot("key", key);
+            .onPlot("key", function (data, width, height, xScale, yScale) {
+                  var selection = d3.select(this),
+                      graphKey = key.x(width - 80).y(10);
+
+                  selection
+                      .append('g')
+                      .call(graphKey);
+            });
 
         selection.each(function (data, i) {
             //console.log('barChart:: ', data, i, this);
@@ -220,12 +215,6 @@ module.exports.barChart = function () {
         return my;
     };
 
-    my.rendered = function (_) {
-        if(!arguments.length) return rendered;
-        rendered = _;
-        return my;
-    };
-
     return my;
 };
 
@@ -251,18 +240,20 @@ module.exports.scatterplot = function () {
         yTickFormat = null,
         xLabel = null,
         yLabel = null,
-        rendered = false,
+
+        key = keyComponents.key()
+            .datum([keyComponents.colorRow()]),
 
         dotLabel = graphComponents.drawText()
-                       .text(function (d) { return null; });
+                       .text(function (d) { return null; }),
 
-    var svg = chart.getSVGComponent();
+        svg = chart.getSVGComponent();
+
     svg.ratio(0.55);
     chart.margin({left: 90, right: 40, top: 30, bottom: 80});
 
     function my (selection) {
         chart
-            .prerendered(rendered)
             .xScaleGenerator(xScaleGenerator)
             .yScaleGenerator(yScaleGenerator)
             .xTickFormat(xTickFormat)
@@ -270,7 +261,7 @@ module.exports.scatterplot = function () {
             .xLabel(xLabel)
             .yLabel(yLabel)
             .onPlot("scatterplot-server", function (data, width, height, xScale, yScale) {
-                if (rendered) return;
+                if (!isNode) return;
 
                 var selection = d3.select(this);
                 var outputSelection = selection
@@ -293,7 +284,7 @@ module.exports.scatterplot = function () {
                     .style('fill', function (d) { return color(d);} );
             })
             .onPlot("scatterplot-client", function (data, width, height, xScale, yScale) {
-                if (!rendered) return;
+                if (isNode) return;
 
                 // update labeling to not go out of bounds
                 dotLabel
@@ -318,7 +309,7 @@ module.exports.scatterplot = function () {
                     .on('mouseenter', function (d) {
                         selection.select('.key .colorRow')
                             .datum(d)
-                            .call(rows.colorRow()
+                            .call(keyComponents.colorRow()
                                       .text(d.country)
                                       .color(color(d)));
 
@@ -331,22 +322,20 @@ module.exports.scatterplot = function () {
                         // nullify the color key
                         selection.select('.key .colorRow')
                             .datum(d)
-                            .call(rows.colorRow());
+                            .call(keyComponents.colorRow());
 
                         d3.select(this.parentNode)
                             .classed('highlight', false) });
             })
-            .onPlot("key", function (data, width, height, xScale, yScale) {
+            .onPlot("key-server", function (data, width, height, xScale, yScale) {
+                if (!isNode) return;
+
                 var selection = d3.select(this),
-                    graphKey = key().x(width - 80).y(10),
-                    datum = [
-                        rows.colorRow()
-                    ];
+                    graphKey = key.x(width - 80).y(10);
 
                 selection
                     .append('g')
-                    .datum(datum)
-                    .call(graphKey)
+                    .call(graphKey);
             });
 
         selection.each(function (data, i) {
@@ -418,9 +407,117 @@ module.exports.scatterplot = function () {
         return my;
     };
 
-    my.rendered = function (_) {
-        if(!arguments.length) return rendered;
-        rendered = _;
+    my.key = function (_) {
+        if(!arguments.length) return key;
+        key = _;
+        return my;
+    };
+
+    return my;
+};
+
+module.exports.lineChart = function () {
+
+    var chart = graphComponents.chartWithAxices(),
+        x = function (d) { return d; },
+        y = function (d) { return d; },
+        r = function (d) { return 20; },
+        xScaleGenerator = function (data, width, height) {
+            return d3.scaleLinear()
+                .domain([0, d3.max(data, function (d) { return x(d); })])
+                .range([0, width])
+                .nice(); },
+        yScaleGenerator = function (data, width, height) {
+            return d3.scaleLinear()
+                .domain([0, d3.max(data, function (d) { return y(d); })].reverse())
+                .range([0, height])
+                .nice(); },
+        xTickFormat = null,
+        yTickFormat = null,
+        xLabel = null,
+        yLabel = null,
+        svg = chart.getSVGComponent();
+
+    svg.ratio(0.55);
+    chart.margin({left: 90, right: 40, top: 30, bottom: 80});
+
+    function my (selection) {
+        chart
+            .xScaleGenerator(xScaleGenerator)
+            .yScaleGenerator(yScaleGenerator)
+            .xTickFormat(xTickFormat)
+            .yTickFormat(yTickFormat)
+            .xLabel(xLabel)
+            .yLabel(yLabel)
+            .onPlot("line-server", function (data, width, height, xScale, yScale) {
+                if (!isNode) return;
+
+                var line = d3.line()
+                    .x(function (d) { return xScale(x(d)); })
+                    .y(function (d) { return yScale(y(d)); })
+                    .curve(d3.curveMonotoneX);
+
+                d3.select(this)
+                    .append('path')
+                    .datum(data)
+                    .attr('class', 'line')
+                    .attr('d', line);
+            });
+
+        selection.each(function (data, i) {
+            //console.log('scatterplot:: ', data, i, this);
+
+            d3.select(this)
+                .attr("class", "scatterplot")
+                .call(chart);
+        });
+    }
+
+    my.x = function (_) {
+        if(!arguments.length) return x;
+        x = _;
+        return my;
+    };
+
+    my.y = function (_) {
+        if(!arguments.length) return y;
+        y = _;
+        return my;
+    };
+
+    my.r = function (_) {
+        if(!arguments.length) return r;
+        r = _;
+        return my;
+    };
+
+    my.xScaleGenerator = function (_) {
+        if(!arguments.length) return xScaleGenerator;
+        xScaleGenerator = _;
+        return my;
+    };
+
+    my.xTickFormat = function (_) {
+        if(!arguments.length) return xTickFormat;
+        xTickFormat = _;
+        return my;
+    };
+
+    my.yTickFormat = function (_) {
+        if(!arguments.length) return yTickFormat;
+        yTickFormat = _;
+        return my;
+    };
+
+    my.xLabel = function (_) {
+        if(!arguments.length) return xLabel;
+        xLabel = _;
+        return my;
+    };
+
+    my.yLabel = function (_) {
+        if(!arguments.length) return yLabel;
+        yLabel = _;
         return my;
     };
 

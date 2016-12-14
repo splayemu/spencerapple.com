@@ -50,10 +50,6 @@ var siteBuild = Metalsmith(__dirname)
     }))
     .use(preprocess())
     .use(browserify())
-    .use(function (files, metadata, done) {
-      console.log(metadata);
-      done();
-    })
     .use(layouts({
       engine: 'pug',
       moment: moment,
@@ -70,8 +66,10 @@ var siteBuild = Metalsmith(__dirname)
     .use(msif(
       preview,
       watch({
-        pattern: '**/*',
-        livereload: preview
+        paths: {
+          '${source}/**/*': true,
+          'layouts/**/*': '**/*',
+        }
       })
     ))
     .build(function (err, files) {

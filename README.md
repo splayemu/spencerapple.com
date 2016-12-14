@@ -1,9 +1,12 @@
 ## Usage
 Build artifacts
-> node build.js
+> npm run build
 
 Build artifacts and start preview server
-> node build.js --preview
+> npm run preview
+
+Update prerenderGraphComponents
+> npm run update-local-modules
 
 ## Notes
 * site metadata is passed to the layouts 

@@ -21,10 +21,11 @@
     "metalsmith-watch": "^1.0.3",
     "moment": "^2.17.1",
     "pug": "^2.0.0-beta6",
-    "graph-components": "file:./local_modules/graph-components"
+    "prerender-graph-components": "file:./local_modules/prerender-graph-components"
   },
   "scripts": {
     "preview": "node build.js --preview",
-    "build": "node build.js"
+    "build": "node build.js",
+    "update-local-modules": "rm -rf node_modules/prerender-graph-components; npm install"
   }
 }

@@ -1,6 +1,7 @@
 'use strict';
 
 const utils = require('./utils');
+const isNode = require('detect-node');
 
 module.exports.drawText = function drawText () {
     var t = function (d) { return null; },
@@ -117,20 +118,17 @@ module.exports.chartWithAxices = function chartWithAxices () {
         yTickFormat = null,
         xLabel = null,
         yLabel = null,
-        color = utils.randomColor,
-        prerendered = false;
+        color = utils.randomColor;
 
     function my (selection) {
         selection.each(function (data, i) {
             let svg;
             let gComponent;
 
-            // prerendered boolean finds svg, doesn't modify it at all
-            if (prerendered) {
+            if (!isNode) {
                 svg = d3.select(this).select('svg');
                 gComponent = svg.select('g');
             } else {
-                // .call() returns the selection not it's return value
                 svg = svgComponent(d3.select(this));
                 gComponent = svg
                     .append('g')
@@ -142,7 +140,7 @@ module.exports.chartWithAxices = function chartWithAxices () {
             var yScale = yScaleGenerator(data, width, height),
                 xScale = xScaleGenerator(data, width, height);
 
-            if (!prerendered) {
+            if (isNode) {
                 // needs interior margins for the axis
                 var xAxis = d3.axisBottom()
                     .scale(xScale)
@@ -255,12 +253,6 @@ module.exports.chartWithAxices = function chartWithAxices () {
     my.yLabel = function (_) {
         if(!arguments.length) return yLabel;
         yLabel = _;
-        return my;
-    };
-
-    my.prerendered = function (_) {
-        if(!arguments.length) return prerendered;
-        prerendered = _;
         return my;
     };
 
