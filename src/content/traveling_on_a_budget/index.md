@@ -4,7 +4,7 @@ author: Spencer Apple
 layout: post.pug
 withImage: budgetVis.png
 publishDate: 2016-09-20 15:00
-modifyDate: 2016-09-20 15:00
+modifyDate: 2016-11-29 15:00
 ---
 
 After working for two years post graduating, my girlfriend and I quit our jobs and bought one way tickets to Lima, Peru.

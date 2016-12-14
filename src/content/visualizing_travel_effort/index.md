@@ -1,9 +1,10 @@
 ---
 title: Visualizing Travel Effort
-author: spencer-apple
-template: article.jade
+author: Spencer Apple
+layout: post.pug
 withImage: travelEffortVis.png
-date: 2016-09-19 15:00
+publishDate: 2016-09-27 15:00
+modifyDate: 2016-12-06 15:00
 ---
 
 Some things make traveling hard: busses leave at early times, distances are large between places, traveling consumes a large portion of your day, stays at each place are short, and the stays themselves are not comfortable.
@@ -14,9 +15,7 @@ This post attempts to show: *Where on our trip did we put the most effort into t
 
 <link rel="stylesheet" href="css/main.css"></link>
 <script type="text/javascript" src="lib/d3.min.js"></script>
-<script type="text/javascript" src="data/places.js"></script>
-<script type="text/javascript" src="src/graphcomponents.js"></script>
-<script type="text/javascript" src="src/visualization.js"></script>
+<script type="text/javascript" src="src/graphComponents.js"></script>
 <script type="text/javascript" src="src/main.js"></script>
 
 ---

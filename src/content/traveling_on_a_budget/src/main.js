@@ -4,46 +4,19 @@ var dispatch = d3.dispatch("loaded"),
 
 document.addEventListener("DOMContentLoaded", function () {
     d3.json("data/places.json", function (error, data) {
-        // aggregate amount spent and num days by country
-        var budgetPerCountry = d3.nest()
-            .key(function(d) { return d.country; })
-            .rollup(function (v) {
-                var days = d3.sum(v, function (d) { return d.value.days; });
-                var amount = d3.sum(v, function (d) { return d.value.amount; });
-                return {
-                    days: days,
-                    amount: amount,
-                    averageDailySpent: amount / days,
-                };
-            })
-            .entries(data.places);
-
-        var countryColors = data.countries.reduce(
-            function (previousValue, currentValue, currentIndex, array) {
-                previousValue[currentValue.name] = d3.schemeCategory20[currentIndex];
-                return previousValue;
-            }, {});
-
-        var newData = {
-            budgetPerCountry: budgetPerCountry,
-            places: data.places,
-            countryColors: countryColors
-        };
-
-        dispatch.call("loaded", this, newData);
+        dispatch.call("loaded", this, data);
     });
 });
 
 dispatch.on("loaded.budgetByCountry", function (data) {
-    var barChart = graphComponents.barChart()
+    var barChart = prerenderGraphComponents.barChart()
         .x(function (d) { return d.key; })
         .y(function (d) { return d.value.averageDailySpent; })
         .yTickFormat(d3.format("$,"))
         .yLabel('Average Daily Spending')
         .color(function (d) { return data.countryColors[d.key]; })
         .hoverText(function (d) { return twoDecimalRound(d.value.averageDailySpent); })
-        .key(null)
-        .rendered(true);
+        .key(prerenderGraphComponents.key());
 
     d3.select('#budgetByCountry')
         .datum(data.budgetPerCountry)
@@ -55,7 +28,7 @@ dispatch.on("loaded.budgetByPlace", function (data) {
         .domain(d3.extent(data.places, function (d) { return d.value.days; }))
         .range([5, 15]);
 
-    var scatterplotPlaces = graphComponents.scatterplot()
+    var scatterplotPlaces = prerenderGraphComponents.scatterplot()
         .x(function (d) { return new Date(d.midDate); })
         .y(function (d) { return d.value.amount / d.value.days; })
         .r(function (d) { return rScale(d.value.days); })
@@ -68,8 +41,7 @@ dispatch.on("loaded.budgetByPlace", function (data) {
         .yTickFormat(d3.format("$,"))
         .yLabel('Average Daily Spending')
         .color(function (d) { return data.countryColors[d.country]; })
-        .hoverText(function (d) { return d.name;})
-        .rendered(true);
+        .hoverText(function (d) { return d.name;});
 
     d3.select('#spendingPerPlace')
         .datum(data.places)
@@ -80,7 +52,7 @@ dispatch.on("loaded.budgetByPlace", function (data) {
         .attr("x", 3)
         .style("text-anchor", "start");
 
-    var scatterplot1 = graphComponents.scatterplot()
+    var scatterplot1 = prerenderGraphComponents.scatterplot()
         .x(function (d) { return d.value.days; })
         .y(function (d) { return d.value.amount / d.value.days; })
         .r(function (d) { return rScale(d.value.days); })
@@ -92,8 +64,7 @@ dispatch.on("loaded.budgetByPlace", function (data) {
         .xLabel('Length of Stay (days)')
         .yLabel('Average Daily Spending')
         .color(function (d) { return data.countryColors[d.country]; })
-        .hoverText(function (d) { return d.name;})
-        .rendered(true);
+        .hoverText(function (d) { return d.name;});
 
     d3.select('#avgVsLength')
         .datum(data.places)
