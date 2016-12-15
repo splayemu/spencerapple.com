@@ -22,7 +22,7 @@ if (args.length) {
 var siteBuild = Metalsmith(__dirname)
     .metadata({
       site: {
-        title: "Things SAPPLE Makes",
+        title: "Spencer Apple",
         url: 'https://spencerapple.com',
         description: '',
         repo: "https://gitlab.com/splayemu/splayemu.gitlab.io"

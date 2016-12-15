@@ -37,7 +37,7 @@ module.exports.barChart = function () {
     var svg = chart.getSVGComponent();
 
     // barCharts should have a y label
-    chart.margin({left: 80, right: 30, top: 30, bottom: 50});
+    chart.margin({left: 80, right: 60, top: 30, bottom: 50});
 
     function my (selection) {
         chart
@@ -250,7 +250,7 @@ module.exports.scatterplot = function () {
         svg = chart.getSVGComponent();
 
     svg.ratio(0.55);
-    chart.margin({left: 90, right: 40, top: 30, bottom: 80});
+    chart.margin({left: 100, right: 60, top: 30, bottom: 100});
 
     function my (selection) {
         chart

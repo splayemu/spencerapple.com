@@ -21,9 +21,7 @@ block main
               +link(post)
                 != post.title
             h3
-              div.date #{moment(post.publishDate).format("M.D.YYYY")}
-                if modifyDate && moment(post.publishDate).isBefore(modifyDate)
-                  span Updated #{moment(post.modifyDate).format("M.D.YYYY")}
+              div.date #{moment(post.publishDate).format("MMMM YYYY")}
 
           - var klass = 'content'
           if post.withImage

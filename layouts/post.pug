@@ -2,8 +2,8 @@ extends layout
 
 block main
   article.article
-    h1= title
-    div.date #{moment(publishDate).format("M.D.YYYY")}
-      if modifyDate && moment(publishDate).isBefore(modifyDate)
-        span Updated #{moment(modifyDate).format("M.D.YYYY")}
+    article.article
+      header
+        h2= title
+        div.date #{moment(publishDate).format("MMMM YYYY")}
     div!= contents
