@@ -1,13 +1,13 @@
 var Metalsmith = require('metalsmith');
 var markdown = require('metalsmith-markdown');
 var layouts = require('metalsmith-layouts');
-var permalinks = require('metalsmith-permalinks');
 var moment = require('moment');
 var serve = require('metalsmith-serve');
 var watch = require('metalsmith-watch');
 var collections = require('metalsmith-collections');
 var excerpts = require('metalsmith-excerpts');
 var browserify = require('metalsmith-browserify-alt');
+var path = require('metalsmith-paths');
 var msif = require('metalsmith-if');
 
 var preprocess = require('metalsmith-preprocess');
@@ -45,9 +45,7 @@ var siteBuild = Metalsmith(__dirname)
         pattern: 'partials/**/*.html'
       }
     }))
-    .use(permalinks({
-      relative: false
-    }))
+    .use(path({ directoryIndex: "index.html" }))
     .use(preprocess())
     .use(browserify())
     .use(layouts({
@@ -60,7 +58,10 @@ var siteBuild = Metalsmith(__dirname)
       preview,
       serve({
         port: 8080,
-        verbose: true
+        verbose: true,
+        http_error_files: {
+          404: "/404.html"
+        },
       })
     ))
     .use(msif(
@@ -77,6 +78,7 @@ var siteBuild = Metalsmith(__dirname)
         throw err;
       }
       else {
+        //console.log(files);
         console.log('Served files:');
       }
     });

@@ -1,16 +1,13 @@
 ---
 title: GemTD Maze Runner with Dijkstra
 author: spencer-apple
-template: article.jade
+layout: post.pug
 withImage: maze.png
-date: 2014-01-04 15:00
+publishDate: 2014-01-04 15:00
 ---
-
 
 The maze layout is in the classic Gem TD layout from WC3.
 How many times can you force the unit to run through your maze?
-
-<span class="more"><span>
 
 Click and drag on squares to create a maze.
 Press 'b' to send a unit moving along the path.

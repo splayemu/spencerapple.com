@@ -15,13 +15,13 @@
     "metalsmith-if": "^0.1.1",
     "metalsmith-layouts": "^1.4.1",
     "metalsmith-markdown": "^0.2.1",
-    "metalsmith-permalinks": "^0.1.0",
+    "metalsmith-paths": "^3.0.1",
     "metalsmith-preprocess": "^0.1.0",
     "metalsmith-serve": "0.0.7",
     "metalsmith-watch": "^1.0.3",
     "moment": "^2.17.1",
-    "pug": "^2.0.0-beta6",
-    "prerender-graph-components": "file:./local_modules/prerender-graph-components"
+    "prerender-graph-components": "file:./local_modules/prerender-graph-components",
+    "pug": "^2.0.0-beta6"
   },
   "scripts": {
     "preview": "node build.js --preview",

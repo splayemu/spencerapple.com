@@ -6,7 +6,7 @@ mixin link(post)
        a(href=post.externalUrl target="_blank")
          block
     else 
-       a(href=`/${post.path}`)
+       a(href=`/${post.path.dir}`)
          block
   else
     text No Content for the Link
@@ -29,7 +29,7 @@ block main
           section(class=klass)
               if post.withImage
                 +link(post)
-                  img.left(src=`/${post.path}/${post.withImage}`)
+                  img.left(src=`/${post.path.dir}/${post.withImage}`)
               if post.excerpt
                 != post.excerpt
     else
