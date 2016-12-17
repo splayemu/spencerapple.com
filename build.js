@@ -78,7 +78,6 @@ var siteBuild = Metalsmith(__dirname)
         throw err;
       }
       else {
-        //console.log(files);
         console.log('Served files:');
       }
     });

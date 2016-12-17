@@ -1,9 +1,8 @@
 extends layout
 
 block main
-  article.article
-    article.article
-      header
-        h2= title
-        div.date #{moment(publishDate).format("MMMM YYYY")}
+  div.article
+    header
+      h2= title
+      h4.date #{moment(publishDate).format("MMMM YYYY")}
     div!= contents

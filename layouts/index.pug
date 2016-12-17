@@ -15,13 +15,12 @@ block main
   #content
     if collections.content && collections.content.length > 0
       each post in collections.content
-        article.article
+        div.article
           header
             h2
               +link(post)
                 != post.title
-            h3
-              div.date #{moment(post.publishDate).format("MMMM YYYY")}
+            h4.date #{moment(post.publishDate).format("MMMM YYYY")}
 
           - var klass = 'content'
           if post.withImage

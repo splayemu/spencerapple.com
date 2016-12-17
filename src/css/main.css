@@ -177,13 +177,17 @@ header .content-wrap .nav-bar {
 }
 
 .article {
-  margin: 0 0 4.75em 0;
+  margin: 0 0 3.75em 0;
 }
 
 .article header {
   margin: 1.25em 0 2em 0;
-  padding: 1em;
+  padding-top: 1em;
   border-top: 1px dashed #d2d2d2;
+}
+
+.article header h2 {
+  margin-bottom: 0;
 }
 
 .article .content p {
