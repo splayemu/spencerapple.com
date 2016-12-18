@@ -12,24 +12,23 @@ mixin link(post)
     text No Content for the Link
 
 block main
-  #content
-    if collections.content && collections.content.length > 0
-      each post in collections.content
-        div.article
-          header
-            h2
-              +link(post)
-                != post.title
-            h4.date #{moment(post.publishDate).format("MMMM YYYY")}
+  if collections.content && collections.content.length > 0
+    each post in collections.content
+      div.article
+        div.title
+          h2
+            +link(post)
+              != post.title
+          h4.date #{moment(post.publishDate).format("MMMM YYYY")}
 
-          - var klass = 'content'
-          if post.withImage
-            - klass = 'content withImage'
-          section(class=klass)
-              if post.withImage
-                +link(post)
-                  img.left(src=`/${post.path.dir}/${post.withImage}`)
-              if post.excerpt
-                != post.excerpt
-    else
-      h2 there ain't anything here, man
+        - var klass = 'excerpt'
+        if post.withImage
+          - klass = 'excerpt withImage'
+        section(class=klass)
+            if post.withImage
+              +link(post)
+                img.left(src=`/${post.path.dir}/${post.withImage}`)
+            if post.excerpt
+              != post.excerpt
+  else
+    h2 there ain't anything here, man

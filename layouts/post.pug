@@ -2,7 +2,7 @@ extends layout
 
 block main
   div.article
-    header
+    div.title
       h2= title
       h4.date #{moment(publishDate).format("MMMM YYYY")}
     div!= contents

@@ -23,6 +23,7 @@ body, h1, h2, h3, h4, h5, h6 {
 .content-wrap {
   margin: 0 auto;
   width: auto;
+  padding: 0 1em;
 }
 
 .content-wrap svg {
@@ -70,6 +71,7 @@ h4 {
   margin-bottom: 0.8em;
 }
 
+/* tablet */
 @media (min-width: 43.75em) {
   .content {
     font-size: 1em;
@@ -111,6 +113,7 @@ h4 {
   }
 }
 
+/* full size */
 @media (min-width: 56.25em) {
   .content-wrap {
     width: 42em;
@@ -169,7 +172,6 @@ header .content-wrap {
 header .content-wrap .logo {
   display: inline-block;
   vertical-align: top;
-  padding-right: 1em;
 }
 
 header .content-wrap .nav-bar {
@@ -180,17 +182,17 @@ header .content-wrap .nav-bar {
   margin: 0 0 3.75em 0;
 }
 
-.article header {
+.article .title {
   margin: 1.25em 0 2em 0;
   padding-top: 1em;
   border-top: 1px dashed #d2d2d2;
 }
 
-.article header h2 {
+.article .title h2 {
   margin-bottom: 0;
 }
 
-.article .content p {
+.article .excerpt p {
   display: inline;
   font-size: 1.2em;
 }
@@ -202,7 +204,7 @@ header .content-wrap .nav-bar {
   margin-left: 5%;
 }
 
-.article .content img {
+.article .excerpt img {
   display: block;
   width: 100%;
   border-radius: 10px;
