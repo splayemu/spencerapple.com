@@ -81,7 +81,7 @@ module.exports.barChart = function () {
                 // EXIT
                 outputSelection
                     .exit().remove();
-             })
+            })
             .onPlot('barChart-client', function (data, width, height, xScale, yScale) {
                 if (isNode) return;
 
