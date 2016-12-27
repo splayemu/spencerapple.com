@@ -1,11 +1,13 @@
 ---
-title: Prerendering D3 Visualizations with Metalsmith and JSDom
+title: Preprocessing D3 Visualizations with Metalsmith and JSDom
 author: Spencer Apple
 layout: post.pug
 publishDate: 2016-12-24 15:00
 ---
 
-Inspired by Maciej Ceglowski's talk, [Deep-Fried Data](http://idlewords.com/talks/deep_fried_data.htm), I wanted to convert my client rendered D3 visualizations to server renderings.
+Preprocessing data visualizations on the server allows users without Javascript see my graphs and things.
+
+Inspired by Maciej Ceglowski's talk, [Deep-Fried Data](http://idlewords.com/talks/deep_fried_data.htm), I converted my client rendered D3 visualizations to server renderings.
 
 He writes:
 
@@ -290,9 +292,6 @@ Check out the full code here: [prerender-graph-components](https://github.com/sp
 ## Conclusions
 
 Putting it all together, the preprocess plugin provides a way to invoke the server side renderings.
-My D3 component code allows for straightforward client/server separation.
+My D3 graph component code provides an api to generate graphs on the server and add dynamic effects on the client.
 
-Some drawbacks of my implementation:
-* The convention of having the same client and server code allows programmers to break it
-* Have to update graphs on both server and client
-
+The split between the client and the server is done by convention. This lets the user can break my code by failing to keep the client and server code/data consistent.
