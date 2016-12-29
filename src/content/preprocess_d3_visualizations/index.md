@@ -5,11 +5,10 @@ layout: post.pug
 publishDate: 2016-12-24 15:00
 ---
 
-Preprocessing data visualizations on the server allows users without Javascript see my graphs and things.
-
 Inspired by Maciej Ceglowski's talk, [Deep-Fried Data](http://idlewords.com/talks/deep_fried_data.htm), I converted my client rendered D3 visualizations to server renderings.
+Preprocessing the data visualizations on the server allows users without Javascript to see my wonderful bar charts and scatterplots.
 
-He writes:
+Ceglowski writes:
 
 > Publish your texts as text. Let the images be images. Put them behind URLs and then commit to keeping them there. A URL should be a promise. 
 
@@ -21,15 +20,17 @@ Also my website now won't be meaningless for those who disable Javascript.
 ## Architecture
 
 My website is generated with Metalsmith, a static site generator written in Node.
-Metalsmith reads in the content files into memory then runs them through a series of plugins that transform the content.
+Static site generators allow users to write content in Markdown and define their layouts in a templating language like [Pug](https://pugjs.org/api/getting-started.html).
+Metalsmith reads the content files into memory then runs them through a series of plugins that transform the content files into HTML, CSS, and JS.
 To finish the content is outputted to a build directory.
 <img src="https://docs.google.com/drawings/d/1uEUX3ral9Nc5kFbGvvqwRJ30FtGCowD4q07yUDCxKTY/pub?w=662&amp;h=226">
 
-Previously, my data visualizations were served and rendered like so:
+In the standard way of creating data visualizations with D3, the webserver serves HTML, CSS, and JS.
+Then each browser interprets the Javascript to draw the SVG images. 
 <img src="https://docs.google.com/drawings/d/1ZbYeOlL9AjmTVy46sHlA-DcMfwvRGVeaDxpD6TSwews/pub?w=515&amp;h=175">
 <div id="client-workflow"></div>
 
-Compared to rendering the visuals on the server:
+In order to preprocess my visualizations, I moved the Javascript interpretation onto the server.
 <img src="https://docs.google.com/drawings/d/1gc3xJj4-4R2VhM29eQDt2zlohPsTQ9n4_sQC0oavViI/pub?w=627&amp;h=174">
 <div id="server-workflow"></div>
 
@@ -52,7 +53,7 @@ The following directory structure will please metalsmith-preprocess.
     │   └── preprocess.js
     └── post2
         ├── index.html
-        └── preprohcess.js
+        └── preprocess.js
 ```
 
 The plugin reads the exported functions of each preprocess.js file and executes them in the context of JSDom.
@@ -86,14 +87,16 @@ For working examples, check out the [metasmith-preprocess tests](https://github.
 
 ## Building the D3 Graphs
 
+Creating the graphs on the server is very dandy, but in order to have complex dynamic effects, there does need to be Javascript running on the client as well.
+I solved that by running the same code both on the client and server.
+The graph generation code [detects if it's running in Node](https://www.npmjs.com/package/detect-node) and, if it's running on the server, creates the SVG element and axices. 
+If running on the client, it loads in the svg element already created and then adds dynamic effects.
+
 Following Mike Bostocks' [Towards Reusable Charts](https://bost.ocks.org/mike/chart/), I wanted to create an easy to use and reusable component to generate graphs for my data visualizations. 
 
 The important chunk of code is the chartWithAxices component below. 
 It follows the D3 method chaining style and accepts functions as parameters to generate the X and Y scales.
 Notice that the actual d3 scales are created here and are used to create the axices, then are passed to the plot callbacks in order to help render the graphs. 
-
-The graph generation code [detects if it's running in Node](https://www.npmjs.com/package/detect-node) and branches to either the server or client code.
-The code if running on the server creates the SVG element and axices, while if running on the client loads in the svg element already created.
 
 ```javascript
 // chartWithAxices creates an svg chart with the x and y axices
@@ -294,4 +297,4 @@ Check out the full code here: [prerender-graph-components](https://github.com/sp
 Putting it all together, the preprocess plugin provides a way to invoke the server side renderings.
 My D3 graph component code provides an api to generate graphs on the server and add dynamic effects on the client.
 
-The split between the client and the server is done by convention. This lets the user can break my code by failing to keep the client and server code/data consistent.
+The split between the client and the server is done by convention. This lets the user break my code by failing to keep the client and server code/data consistent.
