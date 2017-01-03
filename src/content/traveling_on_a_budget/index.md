@@ -27,7 +27,7 @@ My girlfriend Lauren is learning to program with a focus on geography; she has b
 She created a list of places with start and end dates which I used to aggregate our spending by place and by country.
 
 ---
-## Average Daily Spending per Country
+### Average Daily Spending per Country
 <div id="budgetByCountry"></div>
 
 We started out with a heavy budget; drinking, eating, and going on lots of tours. 
@@ -44,12 +44,12 @@ Going through Central America, we pretty much failed being budgety for several r
 The trip was winding down, we were lazy, and the tropical beach vibe was too hard to resist.
 
 ---
-## Average Daily Spending per Place
+### Average Daily Spending per Place
 Here you can see our Average Daily Spending on the Y Axis, when we visited on the X Axis, and our length of stay via the size of the circle.
 <div id="spendingPerPlace"></div>
 
 ---
-## Average Daily Spending over Length of Stay
+### Average Daily Spending over Length of Stay
 The same places now plotted with respect to the length of time we stayed.
 
 The circles in the top left show our highest cost excursions, which include flights, expensive food and accommodation, staying in an ecolodge in the Amazon, and our sailing trip through the San Blas Islands.
@@ -58,7 +58,7 @@ In the bottom left corner, you will find many towns in the Chilean Patagonia whe
 <div id="avgVsLength"></div>
 
 ---
-## Conclusions
+### Conclusions
 All in all it was entertaining to make these visuals. 
 I spent a lot of time making reusable D3 components which was a challenge in itself.
 

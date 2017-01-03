@@ -17,7 +17,7 @@ I should make my content as distributable and archivable as possible.
 SVG is more distributable and long lasting than D3 4.3.0. 
 Also my website now won't be meaningless for those who disable Javascript.
 
-## Architecture
+### Architecture
 
 My website is generated with Metalsmith, a static site generator written in Node.
 Static site generators allow users to write content in Markdown and define their layouts in a templating language like [Pug](https://pugjs.org/api/getting-started.html).
@@ -34,7 +34,7 @@ In order to preprocess my visualizations, I moved the Javascript interpretation 
 <img src="https://docs.google.com/drawings/d/1gc3xJj4-4R2VhM29eQDt2zlohPsTQ9n4_sQC0oavViI/pub?w=627&amp;h=174">
 <div id="server-workflow"></div>
 
-## Building the Metalsmith Plugin 
+### Building the Metalsmith Plugin 
 
 The plugin, [metasmith-preprocess](https://github.com/splayemu/metalsmith-preprocess), runs JSDom and executes user defined Javascript to update html. 
 JSDom is a Node implementation of the DOM; it's api allows you to do pretty much everything a normal browser DOM will do - such as append elements and add attributes to nodes.
@@ -85,7 +85,7 @@ module.exports.updateText = function (query_selector) {
 
 For working examples, check out the [metasmith-preprocess tests](https://github.com/splayemu/metalsmith-preprocess/tree/master/test).
 
-## Building the D3 Graphs
+### Building the D3 Graphs
 
 Creating the graphs on the server is very dandy, but in order to have complex dynamic effects, there does need to be Javascript running on the client as well.
 I solved that by running the same code both on the client and server.
@@ -164,7 +164,7 @@ module.exports.chartWithAxices = function () {
 };
 ```
 
-### Building a Bar Chart with chartWithAxices
+#### Building a Bar Chart with chartWithAxices
 
 By registering multiple plot functions, it's easy to split the server and client code.
 
@@ -252,7 +252,7 @@ module.exports.barChart = function () {
 };
 ```
 
-### Using the Components
+#### Using the Components
 
 Now to actually use the barChart component, you provide accessor functions for each of the graph properties.
 To keep everything consistent and simple, the client and server components use the same api and data.
@@ -292,7 +292,7 @@ d3.select('#budgetByCountry')
 
 Check out the full code here: [prerender-graph-components](https://github.com/splayemu/spencerapple.com/tree/master/local_modules/prerender-graph-components)
 
-## Conclusions
+### Conclusions
 
 Putting it all together, the preprocess plugin provides a way to invoke the server side renderings.
 My D3 graph component code provides an api to generate graphs on the server and add dynamic effects on the client.

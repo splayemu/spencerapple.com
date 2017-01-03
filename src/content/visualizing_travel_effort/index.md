@@ -19,7 +19,7 @@ This post attempts to show: *Where on our trip did we put the most effort into t
 <script type="text/javascript" src="src/main.js"></script>
 
 ---
-## Length of Stay per Country
+### Length of Stay per Country
 First, I looked at the total time we spent in each country.
 
 We spent more time in the South American countries than the Central American ones.
@@ -30,7 +30,7 @@ This makes sense as they are larger, and we visited more destinations in each co
 Each graph uses the same color to display the country.
 
 ---
-## Length of Stay per Place
+### Length of Stay per Place
 Next up, how long did we stay in each place?
 Here you can also see how many places we visited in each country.
 
@@ -39,7 +39,7 @@ Here you can also see how many places we visited in each country.
 While this graph shows periods of high mobility, it doesn't contain any information regarding the travel time between two places.
 
 ---
-## Travel Time to each Place
+### Travel Time to each Place
 Traveling is exhausting. 
 I wanted to show how much time we spent on a bus, plane, ferry, or by the side of the road waiting for a ride.
 
@@ -49,7 +49,7 @@ It would be interesting to use an API to determine the distance traveled as well
 <div id="travelTimePerPlace"></div>
 
 ---
-## Travel Time to Each Place over Datetime
+### Travel Time to Each Place over Datetime
 
 <div id="travelTimePerPlaceScatterplot"></div>
 
@@ -58,7 +58,7 @@ These graphs do a good job showing how much travel we were doing, but they have 
 While it did take us 12 hours to bus there from Bogotá, we ended up staying there longer than any other place.
 
 ---
-## Travel Effort (Travel Time to / Length of Stay) over Datetime
+### Travel Effort (Travel Time to / Length of Stay) over Datetime
 Instead of Travel Time, a ratio of travel time / length of stay better shows our Relative Travel Effort.
 
 Higher points mean we spent a higher amount of relative time traveling.
@@ -78,13 +78,13 @@ In reality, those valleys were momentary respites, but were apart of longer stre
 Perhaps a metric that dampened the highs and lows of the travel effort line would better visualize how we felt at the time, but would further abstract the visuals from the data.
 
 ---
-## Relative Travel Effort per Country
+### Relative Travel Effort per Country
 Aggregating everything back up, it's easy to compare our Relative Travel Effort for each country.
 
 <div id="travelSpeedCountry"></div>
 
 ---
-## Conclusions
+### Conclusions
 
 To answer the question: *Where on our trip did we put the most effort into traveling?* 
 
