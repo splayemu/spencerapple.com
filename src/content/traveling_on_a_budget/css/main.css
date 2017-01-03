@@ -6,11 +6,11 @@ svg {
 
 svg text {
   fill: black;
-  font-size: 20px;
+  font-size: 1.1em;
 }
 
 .axis text {
-  font: 15px sans-serif;
+  font: 1.2em sans-serif;
 }
 
 .axis line,
@@ -44,7 +44,7 @@ svg text {
 }
 
 .axis .label {
-  font-size: 20px;
+  font-size: 1.5em; 
 }
 
 .barChart .xAxis path {
