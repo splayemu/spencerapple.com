@@ -25,7 +25,7 @@
   },
   "scripts": {
     "preview": "node build.js --preview",
-    "build": "node build.js",
+    "build": "rm -rf node_modules/prerender-graph-components; npm install; node build.js",
     "update-local-modules": "rm -rf node_modules/prerender-graph-components; npm install"
   }
 }
