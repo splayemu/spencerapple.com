@@ -108,10 +108,10 @@ module.exports.chartWithAxices = function chartWithAxices () {
         width = svgComponent.width() - padding.left - padding.right,
         height = svgComponent.height() - padding.top - padding.bottom,
         xScaleGenerator = function (data, width, height) {
-            utils.assert(false, "xScaleGenerator:: not defined");
+            console.assert(false, "xScaleGenerator:: not defined");
         },
         yScaleGenerator = function (data, width, height) {
-            utils.assert(false, "yScaleGenerator:: not defined");
+            console.assert(false, "yScaleGenerator:: not defined");
         },
         dispatch = d3.dispatch('plot'),
         xTickFormat = null,

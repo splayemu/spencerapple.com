@@ -1,13 +1,3 @@
-module.exports.assert = function assertF (condition, message) {
-    if (!condition) {
-        message = message || "Assertion failed";
-        if (typeof Error !== "undefined") {
-            throw new Error(message);
-        }
-        throw message;
-    }
-};
-
 module.exports.randomColor = (function (){
   var golden_ratio_conjugate = 0.618033988749895,
       h = Math.random(),
