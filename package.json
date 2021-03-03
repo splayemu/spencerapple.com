@@ -21,7 +21,7 @@
     "metalsmith-watch": "^1.0.3",
     "moment": "^2.17.1",
     "prerender-graph-components": "file:./local_modules/prerender-graph-components",
-    "pug": "^2.0.0-beta6"
+    "pug": "^3.0.1"
   },
   "scripts": {
     "preview": "node build.js --preview",
