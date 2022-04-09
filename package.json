@@ -19,7 +19,7 @@
     "metalsmith-preprocess": "^0.1.1",
     "metalsmith-serve": "0.0.7",
     "metalsmith-watch": "^1.0.3",
-    "moment": "^2.17.1",
+    "moment": "^2.29.2",
     "prerender-graph-components": "file:./local_modules/prerender-graph-components",
     "pug": "^2.0.0-beta6"
   },
