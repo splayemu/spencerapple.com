@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "browserify": "^13.1.1",
-    "d3": "^4.3.0",
+    "d3": "^7.6.1",
     "metalsmith": "^1.0.0",
     "metalsmith-branch": "0.0.4",
     "metalsmith-browserify-alt": "^1.0.1",
